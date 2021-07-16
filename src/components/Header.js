@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-
+import { transitions } from 'lib/style-utils';
 const Wrapper = styled.div`
     /* 레이아웃 */
     display: flex;
@@ -12,6 +12,7 @@ const Wrapper = styled.div`
     width: 100%;
     top: 0px;
     z-index: 5;
+    cursor: pointer;
 
     /* 색상 */
     background: ${oc.indigo[6]};
@@ -21,13 +22,21 @@ const Wrapper = styled.div`
 
     /* 폰트 */
     font-size: 2.5rem;
-    font-family: 'Baloo', cursive
+    font-family: 'Baloo', cursive;
+    
+    &:hover {
+        color: ${oc.gray[2]};
+    }
+
+    &:active {
+        color: ${oc.gray[3]};
+    }
 `;
 
 
-const Header = () => (
+const Header = ({header}) => (
     <Wrapper>
-        Search
+        {header}
     </Wrapper>
 );
 

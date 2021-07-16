@@ -1,44 +1,32 @@
 {
   "memo": [
     {
-      "title": "12",
-      "body": "s",
+      "title": "Strinig to int",
+      "body": "",
+      "code": "int /*int*/ = Integer.parseInt(/*string*/);\n",
+      "category": 1,
       "id": 1
     },
     {
-      "title": "",
+      "title": "int to String",
       "body": "",
+      "code": "String /* string */ = Integer.toString(/* int */);",
+      "category": 1,
       "id": 2
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "SEARCH"
     },
     {
-      "title": "23",
-      "body": "232",
-      "id": 3
+      "id": 2,
+      "name": "ERROR"
     },
     {
-      "title": "23",
-      "body": "23232323232",
-      "id": 4
-    },
-    {
-      "title": "23232",
-      "body": "2323",
-      "id": 5
-    },
-    {
-      "title": "3232",
-      "body": "32323",
-      "id": 6
-    },
-    {
-      "title": "",
-      "body": "232323",
-      "id": 7
-    },
-    {
-      "title": "",
-      "body": "2323232",
-      "id": 8
+      "id": 3,
+      "name": "COMMON"
     }
   ]
 }

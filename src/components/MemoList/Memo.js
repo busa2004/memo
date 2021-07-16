@@ -4,6 +4,9 @@ import oc from 'open-color';
 import PropTypes from 'prop-types';
 import { media } from 'lib/style-utils';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-github";
 
 import {AiOutlineLike} from 'react-icons/ai';
 // 화면 크기에 따라 일정 비율로 가로 사이즈를 설정합니다
@@ -77,8 +80,8 @@ class Memo extends Component {
                 <Square onClick={handleClick}>
                     <Contents>
                         { title && <Title>{title} <AiOutlineLike/> </Title>}
-                       
-                        <Body>{body}</Body>
+                        <Body>{body} 
+                        </Body>
                     </Contents>
                 </Square>
             </Sizer>

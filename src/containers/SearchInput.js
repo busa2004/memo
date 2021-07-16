@@ -30,8 +30,13 @@ class SearchInput extends Component {
 
     onKeyPress = (e) => {
         if(e.key == 'Enter'){
-            const { MemoActions, title } = this.props;
-            MemoActions.getSearchMemo(title);
+            const { MemoActions, title, id } = this.props;
+            if(id == '1'){
+                MemoActions.getSearchMemo(title,id);    
+            }else{
+                MemoActions.getSearchMemoByCategory(title,id);
+            }
+            
         }
     }
 
@@ -58,7 +63,8 @@ class SearchInput extends Component {
 export default connect(
     (state) => ({
         title: state.ui.getIn(['search', 'title']),
-        memos: state.memo.get('data')
+        memos: state.memo.get('data'),
+        id : state.ui.getIn(['header', 'id']),
     }),
     (dispatch) => ({
         UIActions: bindActionCreators(uiActions, dispatch),

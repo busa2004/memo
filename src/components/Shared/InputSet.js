@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Textarea from 'react-textarea-autosize';
+import AceEditor from "react-ace";
+
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-eclipse";
 
 const TitleInput = styled.input`
     width: 100%;
@@ -12,7 +16,6 @@ const TitleInput = styled.input`
 `;
 
 const StyledTextArea = styled(Textarea)`
-    width: 100%;
     width: 100%;
     border: none;
     outline: none;
@@ -27,7 +30,8 @@ class InputSet extends Component {
     static propTypes = {
         onChange: PropTypes.func,
         title: PropTypes.string,
-        body: PropTypes.string
+        body: PropTypes.string,
+        code: PropTypes.string
     }
 
     componentDidMount() {
@@ -35,8 +39,10 @@ class InputSet extends Component {
         //this.title.focus();
     }
 
+    
+
     render() {
-        const { onChange, title, body } = this.props;
+        const { onChange, onEditChange, title, body, code } = this.props;
 
         return (
             <div>
@@ -54,6 +60,15 @@ class InputSet extends Component {
                     name="body"
                     onChange={onChange}
                     value={body}
+                />
+                 <AceEditor
+                    mode="javascript"
+                    theme="eclipse"
+                    onChange={onEditChange}
+                    name="code"
+                    width="100%"
+                    editorProps={{ $blockScrolling: true }}
+                    value={code}
                 />
             </div>
         );

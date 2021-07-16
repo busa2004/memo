@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from 'components/Header';
+import Header from './Header';
 import Layout from 'components/Layout';
 import WriteMemo from './WriteMemo';
-
+import * as uiActions from 'modules/ui';
 import * as memoActions from 'modules/memo';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,13 +12,15 @@ import MemoViewerContainer from './MemoViewerContainer';
 import SearchInput from './SearchInput';
 
 import Spinner from 'components/Spinner';
+import 'bootstrap/dist/css/bootstrap.css'
 
 class App extends Component {
     endCursor = 0
     async componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
 
-        const { MemoActions } = this.props;
+        const { MemoActions,header } = this.props;
+       
         // 초기 메모 로딩
         try {
             await MemoActions.getInitialMemo();
@@ -27,6 +29,8 @@ class App extends Component {
             console.log(e);
         }
     }
+
+    
 
     handleScroll = (e) => {
         const { clientHeight } = document.body;
@@ -54,10 +58,11 @@ class App extends Component {
             this.getRecentMemo()
         }, 1000 * 5)
     }
-
+    
     render() {
-        const { pending } = this.props;
-
+        const { pending, header, UIActions } = this.props;
+        const {handleClick} = this
+         
         return (
             <Layout>
                 <Header/>
@@ -77,9 +82,10 @@ export default connect(
     (state) => ({
         cursor: state.memo.getIn(['data', 0, 'id']),
         endCursor: state.memo.getIn(['data', state.memo.get('data').size - 1, 'id']),
-        pending: state.pender.pending
+        pending: state.pender.pending,
     }),
     (dispatch) => ({
-        MemoActions: bindActionCreators(memoActions, dispatch)
+        MemoActions: bindActionCreators(memoActions, dispatch),
+        UIActions: bindActionCreators(uiActions, dispatch)
     })
 )(App);
