@@ -1,18 +1,60 @@
 {
   "memo": [
     {
-      "title": "Strinig to int",
-      "body": "",
-      "code": "int /*int*/ = Integer.parseInt(/*string*/);\n",
-      "category": 1,
+      "title": "신규 아이디 추천",
+      "body": "문자열 함수",
+      "code": "String new_id = /*입력받은 문자열*/\r\n// 1단계 new_id의 모든 대문자를 대응되는 소문자로 치환합니다.\r\nnew_id.toLowerCase();\r\n// 2단계 new_id에서 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거합니다.\r\nnew_id.replaceAll(\"[^-_.a-z0-9]\",\"\");\r\n// 3단계 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.\r\nnew_id.replaceAll(\"[.]{2,}\",\".\");\r\n// 4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.\r\nnew_id.replaceAll(\"^[.]|[.]$\",\"\");\r\n// 5단계 new_id가 빈 문자열이라면, new_id에 \"a\"를 대입합니다.\r\nif(new_id.equals(\"\"))\r\n    new_id+=\"a\";\r\n// 6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.\r\n// 만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.\r\nif(new_id.length() >=16){\r\n    new_id = new_id.substring(0,15);\r\n    new_id=new_id.replaceAll(\"^[.]|[.]$\",\"\");\r\n}\r\n// 7단계 new_id의 길이가 2자 이하라면, new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.\r\nif(new_id.length()<=2)\r\n    while(new_id.length()<3)\r\n        new_id+=new_id.charAt(new_id.length()-1);",
+      "category": "1",
       "id": 1
     },
     {
-      "title": "int to String",
-      "body": "",
-      "code": "String /* string */ = Integer.toString(/* int */);",
+      "title": "소수 만들기",
+      "body": "완전 탐색, 소수",
+      "code": "//3개의 수를 더했을 때 소수가 되는 경우\nimport java.util.Arrays;\n\nclass Solution {\n    \n    //숫자 다돌려봄\n    public int solution(int[] nums) {\n        int ans = 0;\n\n        for(int i = 0; i < nums.length - 2; i ++){\n            for(int j = i + 1; j < nums.length - 1; j ++){\n                for(int k = j + 1; k < nums.length; k ++ ){\n                    if(isPrime(nums[i] + nums[j] + nums[k])){\n                        ans += 1;  \n                    } \n                }\n            }\n        }\n        return ans;\n    }\n    \n    //소수임?\n    public Boolean isPrime(int num){\n        int cnt = 0;\n        for(int i = 1; i <= (int)Math.sqrt(num); i ++){\n            if(num % i == 0) cnt += 1; \n        }\n        return cnt == 1;\n    }\n    \n}",
       "category": 1,
       "id": 2
+    },
+    {
+      "title": "포켓몬",
+      "body": "셋",
+      "code": "// 주어진 포켓몬중에 절반만 가질 수 있는데 \n// 가장 많은 종류를 가지고 싶음\nimport java.util.HashSet;\n\nclass Solution {\n    public int solution(int[] nums) {\n\n        HashSet<Integer> hs = new HashSet<>();\n        //set에 포켓몬 넣음 중복 없어짐\n        for(int i =0; i<nums.length;i++) {\n            hs.add(nums[i]);\n        }\n        \n        //포켓몬 종류가 절반이 넘으면\n        //절반만 가짐\n        if(hs.size()>nums.length/2)\n            return nums.length/2;\n        \n        //절반이 안되면 \n        //다 가짐\n        return hs.size();\n    }\n}",
+      "category": 1,
+      "id": 3
+    },
+    {
+      "title": "크레인 인형뽑기 게임",
+      "body": "배열, 스택",
+      "code": "import java.util.ArrayList;\r\nimport java.util.List;\r\nclass Solution {\r\n    public int solution(int[][] board, int[] moves) {\r\n        int answer = 0;\r\n        List<Integer> nums = new ArrayList<Integer>();\r\n        \r\n        //moves돌면서 board에서 인형 빼서 nums에 추가\r\n        //board에 원래 인형있던 자리에는 0\r\n        for(int i=0;i<moves.length;i++){\r\n            for(int j=0;j<board.length;j++){\r\n                if(board[j][moves[i]-1]!=0){\r\n                    nums.add(board[j][moves[i]-1]);\r\n                    board[j][moves[i]-1]=0;\r\n                    break;\r\n                }\r\n\r\n            }\r\n\r\n        }\r\n        \r\n        //nums에 인형 넣어놓은거\r\n        //마지막부터 돌면서 같은것 두개 짝지어서 없앰\r\n        for(int k=0;k<nums.size();k++){\r\n            if(k!=(nums.size()-1)){\r\n                if(nums.get(k)==nums.get(k+1)){\r\n                    nums.remove(k);\r\n                    nums.remove(k);\r\n                    answer++;\r\n                    k=-1;\r\n\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n        return answer*2;\r\n    }\r\n}",
+      "category": 1,
+      "id": 4
+    },
+    {
+      "title": "완주하지 못한 선수",
+      "body": "해시",
+      "code": "//참가자중에 완주 못한 1명 찾기\r\nimport java.util.HashMap;\r\n\r\nclass Solution {\r\n    public String solution(String[] participant, String[] completion) {\r\n        String answer = \"\";\r\n        HashMap<String, Integer> hm = new HashMap<>();\r\n        //참가자 추가\r\n        for (String player : participant) hm.put(player, hm.getOrDefault(player, 0) + 1);\r\n        //참가자 빼기\r\n        for (String player : completion) hm.put(player, hm.get(player) - 1);\r\n        \r\n        //완주한사람 제외했는데 0이 아닌거 찾기\r\n        for (String key : hm.keySet()) {\r\n            if (hm.get(key) != 0){\r\n                answer = key;\r\n            }\r\n        }\r\n        return answer;\r\n    }\r\n}",
+      "category": 1,
+      "id": 5
+    },
+    {
+      "title": "K번째 수",
+      "body": "배열, 정렬",
+      "code": "//배열 자르고 정렬 한 후 특정 위치 숫자 가져오기\r\nimport java.util.Arrays;\r\nclass Solution {\r\n    public int[] solution(int[] array, int[][] commands) {\r\n        int[] answer = new int[commands.length];\r\n        \r\n        for(int i=0; i<commands.length; i++){\r\n            //배열 자르기\r\n            int[] temp = Arrays.copyOfRange(array, commands[i][0]-1, commands[i][1]);\r\n            //배열 정렬하기\r\n            Arrays.sort(temp);\r\n            //배열 특정 위치 가져오기\r\n            answer[i] = temp[commands[i][2]-1];\r\n        }\r\n\r\n        return answer;\r\n    }\r\n}",
+      "category": 1,
+      "id": 6
+    },
+    {
+      "title": "체육복",
+      "body": "탐욕법",
+      "code": "//체육복 최대한 많은 사람이 가지기\n//옆사람 것만 빌릴 수 있음.\nclass Solution {\n    public int solution(int n, int[] lost, int[] reserve) {\n        int[] people = new int[n];\n        int answer = n;\n        \n        //잃어버린 사람 체육복 뺌\n        for (int l : lost) \n            people[l-1]--;\n        //여분 있는 사람 더함\n        for (int r : reserve) \n            people[r-1]++;\n        \n        //사람들 돌면서 \n        for (int i = 0; i < people.length; i++) {\n            //체육복 없으면\n            if(people[i] == -1) {\n                //왼쪽부터 빌림 1이면 여분 있는거\n                if(i-1>=0 && people[i-1] == 1) {\n                    //체육복 빌렸음\n                    people[i]++;\n                    //빌려준 사람은 한개 뺌\n                    people[i-1]--;\n                //왼쪽이 없으면 오른쪽거 빌림\n                }else if(i+1< people.length && people[i+1] == 1) {\n                    people[i]++;\n                    people[i+1]--;\n                }else \n                    //양쪽다 없으면 못빌림 \n                    answer--;\n            }\n        }\n        return answer;\n    }\n}\n",
+      "category": 1,
+      "id": 7
+    },
+    {
+      "title": "키패드 누르기",
+      "body": "구현",
+      "code": "//오른손잡이인지 왼손잡이인지 구별\r\nclass Solution {\r\n    //0부터 9까지 좌표 {y,x}\r\n    int[][] numpadPos = {\r\n            {3,1}, //0\r\n            {0,0}, //1\r\n            {0,1}, //2\r\n            {0,2}, //3\r\n            {1,0}, //4\r\n            {1,1}, //5\r\n            {1,2}, //6\r\n            {2,0}, //7\r\n            {2,1}, //8\r\n            {2,2}  //9\r\n    };\r\n    //초기 위치\r\n    int[] leftPos = {3,0};\r\n    int[] rightPos = {3,2};\r\n    String hand;\r\n    \r\n    public String solution(int[] numbers, String hand) {\r\n        this.hand = (hand.equals(\"right\")) ? \"R\" : \"L\";\r\n\r\n        String answer = \"\";\r\n        for (int num : numbers) {\r\n            String Umji = pushNumber(num);\r\n            answer += Umji;\r\n\r\n            if(Umji.equals(\"L\")) {leftPos = numpadPos[num]; continue;}\r\n            if(Umji.equals(\"R\")) {rightPos = numpadPos[num]; continue;}\r\n        }\r\n        return answer;\r\n    }\r\n\r\n    //num버튼을 누를 때 어디 손을 사용하는가\r\n    private String pushNumber(int num) {\r\n        if(num==1 || num==4 || num==7) return \"L\";\r\n        if(num==3 || num==6 || num==9) return \"R\";\r\n\r\n        // 2,5,8,0 일때 어디 손가락이 가까운가\r\n        if(getDist(leftPos, num) > getDist(rightPos, num)) return \"R\";\r\n        if(getDist(leftPos, num) < getDist(rightPos, num)) return \"L\";\r\n\r\n        //같으면 손잡이\r\n        return this.hand;\r\n    }\r\n\r\n    //해당 위치와 번호 위치의 거리\r\n    private int getDist(int[] pos, int num) {\r\n        return Math.abs(pos[0]-numpadPos[num][0]) + Math.abs(pos[1]-numpadPos[num][1]);\r\n    }\r\n}",
+      "category": 1,
+      "id": 8
     }
   ],
   "category": [
