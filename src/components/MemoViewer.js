@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import PropTypes from 'prop-types';
 import { media } from 'lib/style-utils';
-import {IoIosTrash} from 'react-icons/io';
+import {IoIosTrash,IoMdClose} from 'react-icons/io';
 import DropdownList from './DropdownList'
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -37,7 +37,7 @@ const Viewer = styled.div`
     `}
 `;
 
-const TrashButton = styled.div`
+const Button = styled.div`
     padding-right: 1rem;
     color: ${oc.gray[6]};
     cursor: pointer;
@@ -78,6 +78,7 @@ const DropdownContent = styled.div`
     z-index: 1;
 `;
 
+
 const MemoViewer = ({visible, title, body, code, category, categoryName, onChange, onUpdate, onDelete, onClose,handleCategoryChange, handleEditChange,dropdownOpen,toggle,categories}) => {
    
 
@@ -99,11 +100,13 @@ const MemoViewer = ({visible, title, body, code, category, categoryName, onChang
                                   />
 
                     <div style={{display:'flex',float:'right',padding:'1rem 0.5rem 1rem 0.5rem' }}>
-                        <TrashButton onClick={onDelete}>
+                        <Button onClick={onDelete}>
                             <IoIosTrash/>
-                        </TrashButton>
+                        </Button>
                         <SaveButton onClick={onUpdate} />
-                        
+                        <Button onClick={onClose}>
+                            <IoMdClose/>
+                        </Button>
                     </div>
                 </div>
 

@@ -6,7 +6,7 @@ const DropdownList = ({categories,handleCategoryChange,dropdownOpen,toggle,categ
 
     const catetoryList = categories.map(
         catetory => (
-            <DropdownItem><div id={catetory.id} onClick={handleCategoryChange} >{catetory.name}</div></DropdownItem>
+            <DropdownItem key={catetory.id}><div  id={catetory.id} onClick={handleCategoryChange} >{catetory.name}</div></DropdownItem>
         )
     );
 

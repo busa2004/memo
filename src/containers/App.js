@@ -44,7 +44,6 @@ class App extends Component {
             // endCursor 가 없거나, 이전에 했던 요청과 동일하다면 여기서 멈춘다.
             if(!endCursor || this.endCursor === endCursor) return;
             this.endCursor = endCursor;
-            console.log(endCursor)
             MemoActions.getPreviousMemo(endCursor);
         }
     }

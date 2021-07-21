@@ -69,6 +69,11 @@ class Memo extends Component {
     handleClick = () => {
         const { memo, onOpen } = this.props;
         onOpen(memo);
+        document.body.style.overflow = "hidden";
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.memo !== this.props.memo;
     }
 
     render() {

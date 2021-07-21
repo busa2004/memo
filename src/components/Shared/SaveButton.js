@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.div`
-    padding-right: 0.5rem;
+    padding-right: 1rem;
     color: ${oc.gray[6]};
     cursor: pointer;
 

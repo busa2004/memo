@@ -64,9 +64,14 @@ export default handleActions({
         return state.setIn(['write', name], value);
     },
     [RESET_INPUT]: (state) => state.set('write', initialState.get('write')).setIn(['write','category'],1),
-    [OPEN_VIEWER]: (state, action) => state.setIn(['memo', 'open'], true)
-                                           .setIn(['memo', 'info'], action.payload),
-    [CLOSE_VIEWER]: (state, action) => state.setIn(['memo', 'open'], false),
+    [OPEN_VIEWER]: (state, action) => {
+        document.body.style.overflow = "hidden";
+        return state.setIn(['memo', 'open'], true).setIn(['memo', 'info'], action.payload)
+    },
+    [CLOSE_VIEWER]: (state, action) => {
+        document.body.style.overflow = "unset"
+        return state.setIn(['memo', 'open'], false)
+    },
     [CHANGE_VIEWER_INPUT]: (state, action) => {
         const { name, value } = action.payload;
         return state.setIn(['memo', 'info', name], value)

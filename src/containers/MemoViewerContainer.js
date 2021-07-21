@@ -16,7 +16,6 @@ class MemoViewerContainer extends Component {
     }
 
     toggle = (e) => {
-        console.log(e)
     this.setState({ dropdownOpen: !this.state.dropdownOpen });
     }
 

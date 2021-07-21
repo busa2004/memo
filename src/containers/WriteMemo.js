@@ -41,7 +41,6 @@ class WriteMemo extends Component {
      handleChange = (e) => {
         const { UIActions } = this.props;
         const { name, value } = e.target;
-        console.log({name, value})
         UIActions.changeInput({name, value});
     }
 
@@ -88,7 +87,6 @@ class WriteMemo extends Component {
         const { handleFocus, handleChange, handleCreate, handleEditChange,handleCategoryChange, toggle} = this;
         const { focused, title, body, code, categories,category } = this.props;
         const { dropdownOpen } = this.state
-        console.log(categories.find(e => e.id == category))
         return (
             focused ? /* 포커스 된 상태 */ ( 
                 <WhiteBox>
